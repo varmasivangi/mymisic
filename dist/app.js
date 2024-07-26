@@ -18,15 +18,20 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const userDetailsRoutes_1 = __importDefault(require("./routes/userDetailsRoutes"));
+const musicRoutes_1 = __importDefault(require("./routes/musicRoutes"));
 const app = (0, express_1.default)();
 // import * as newName from "./controllers/userDetailsController"
 dotenv_1.default.config();
 const PORT = process.env.PORT || 7000;
-app.use(body_parser_1.default.json());
+// app.use(bodyparser.json())
+app.use(body_parser_1.default.json({ limit: '10mb' }));
+app.use(body_parser_1.default.urlencoded({ limit: '10mb', extended: true }));
 app.use((0, cors_1.default)());
 app.use("/userDetails", userDetailsRoutes_1.default);
 app.use("/verifyOTP", userDetailsRoutes_1.default);
 app.use("/userLogin", userDetailsRoutes_1.default);
+app.use("/addmusic", musicRoutes_1.default);
+app.use("/getSongs", musicRoutes_1.default);
 function dbConnection() {
     return __awaiter(this, void 0, void 0, function* () {
         try {

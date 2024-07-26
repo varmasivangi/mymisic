@@ -39,4 +39,6 @@ import mongoose from "mongoose";
 })
 
 
+
+
 export const userDetails = mongoose.model("userDetails",userDetailsSchema)
