@@ -18,7 +18,7 @@ app.use("/userLogin",router)
 async function dbConnection() {
   try {
   
-    await mongoose.connect("mongodb://localhost:27017/music");
+    await mongoose.connect("mongodb+srv://DummyBoy:15DbqkDOzrDrj8ok@cluster0.hurzcht.mongodb.net/mymusic");
     console.log("running on ",PORT)
   } catch (error) {
     console.log(error);
