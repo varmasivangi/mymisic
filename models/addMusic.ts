@@ -21,4 +21,22 @@ const addMusic = new mongoose.Schema({
   },
 });
 
-export const addmusic = mongoose.model("addmusic", addMusic);
+const addFavList = new mongoose.Schema({
+  songId:{
+    songId:{
+      type:String,
+      require:true
+    },
+    userId:{
+      type:String,
+      require:true
+
+    }
+  }
+})
+
+const addmusic = mongoose.model("addmusic", addMusic);
+
+const addfavSong = mongoose.model("addfavSong",addFavList)
+
+export {addmusic,addfavSong}

@@ -22,6 +22,9 @@ export const addUserDetals = async (req: any, res: any) => {
     createPassword,
     confirmPassword,
   } = req.body;
+
+  
+  console.log(req.body);
   try {
     const isUserDetails = await userDetails.findOne({ email });
 
@@ -88,6 +91,8 @@ export const userLogin = async (req: any, res: any) => {
   try {
     const { email, password } = req.body;
 
+    console.log(password)
+
     const userDetailsValidate = await userDetails.findOne({ email });
 
     if (userDetailsValidate) {
@@ -98,9 +103,7 @@ export const userLogin = async (req: any, res: any) => {
         const token = jwt.sign(
           { id: userDetailsValidate._id, email: userDetailsValidate.email },
           "SECRET_KEY",
-          {
-            expiresIn: "1h",
-          }
+         
         );
 
         res.status(200).json({ jwt: token });
