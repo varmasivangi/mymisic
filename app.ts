@@ -19,7 +19,7 @@ app.use("/verifyOTP",router)
 app.use("/userLogin",router)
 app.use("/addmusic",musicRouter)
 app.use("/getSongs",musicRouter)
-app.use("/addFavSong",musicRouter)
+app.use("/addLikedSong",musicRouter)
 app.use("/getFavSongsList",musicRouter)
 
 async function dbConnection() {
