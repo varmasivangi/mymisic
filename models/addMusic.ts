@@ -22,7 +22,7 @@ const addMusic = new mongoose.Schema({
 });
 
 const addFavList = new mongoose.Schema({
-  songId:{
+
     songId:{
       type:String,
       require:true
@@ -32,7 +32,7 @@ const addFavList = new mongoose.Schema({
       require:true
 
     }
-  }
+  
 })
 
 const addmusic = mongoose.model("addmusic", addMusic);

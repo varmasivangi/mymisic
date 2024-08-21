@@ -24,14 +24,12 @@ const addMusic = new mongoose_1.default.Schema({
 });
 const addFavList = new mongoose_1.default.Schema({
     songId: {
-        songId: {
-            type: String,
-            require: true
-        },
-        userId: {
-            type: String,
-            require: true
-        }
+        type: String,
+        require: true
+    },
+    userId: {
+        type: String,
+        require: true
     }
 });
 const addmusic = mongoose_1.default.model("addmusic", addMusic);
