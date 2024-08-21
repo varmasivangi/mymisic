@@ -27,6 +27,7 @@ const transportMail = nodemailer_1.default.createTransport({
 });
 const addUserDetals = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, phone, createUserName, createPassword, confirmPassword, } = req.body;
+    console.log(req.body);
     try {
         const isUserDetails = yield userDetailsModel_1.userDetails.findOne({ email });
         console.log(isUserDetails);
@@ -91,13 +92,12 @@ exports.verifyUser = verifyUser;
 const userLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
+        console.log(password);
         const userDetailsValidate = yield userDetailsModel_1.userDetails.findOne({ email });
         if (userDetailsValidate) {
             if (userDetailsValidate.email == email &&
                 userDetailsValidate.createPassword == password) {
-                const token = jsonwebtoken_1.default.sign({ id: userDetailsValidate._id, email: userDetailsValidate.email }, "SECRET_KEY", {
-                    expiresIn: "1h",
-                });
+                const token = jsonwebtoken_1.default.sign({ id: userDetailsValidate._id, email: userDetailsValidate.email }, "SECRET_KEY");
                 res.status(200).json({ jwt: token });
             }
             else {

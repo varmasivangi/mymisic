@@ -32,6 +32,8 @@ app.use("/verifyOTP", userDetailsRoutes_1.default);
 app.use("/userLogin", userDetailsRoutes_1.default);
 app.use("/addmusic", musicRoutes_1.default);
 app.use("/getSongs", musicRoutes_1.default);
+app.use("/addLikedSong", musicRoutes_1.default);
+app.use("/getFavSongsList", musicRoutes_1.default);
 function dbConnection() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
