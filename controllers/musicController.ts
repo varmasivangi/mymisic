@@ -78,7 +78,7 @@ export const addfavSongToList = async (req: any, res: any) => {
     const songId = req.body;
     const jwtToken = req.header("Authorization")?.split(" ")[1];
 
-    console.log(jwtToken)
+    console.log(jwtToken )
 
     if (!jwtToken) {
       return res
