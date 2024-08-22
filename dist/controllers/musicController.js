@@ -121,12 +121,12 @@ const addfavSongToList = (req, res) => __awaiter(void 0, void 0, void 0, functio
                 .status(401)
                 .json({ message: "Access denied. No token provided." });
         }
-        const favSong = yield new addMusic_1.addfavSong({
+        const favSong = new addMusic_1.addfavSong({
             songId: songId,
             userId: decoded.id,
         });
+        yield favSong.save();
         res.status(200).json("Added to Fav List");
-        favSong.save();
     }
     catch (error) {
         res.status(500).json("server error");

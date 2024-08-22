@@ -94,13 +94,14 @@ export const addfavSongToList = async (req: any, res: any) => {
         .json({ message: "Access denied. No token provided." });
     }
 
-    const favSong = await new addfavSong({
+    const favSong = new addfavSong({
       songId: songId,
       userId: decoded.id,
     });
+    await favSong.save();
     res.status(200).json("Added to Fav List");
 
-    favSong.save();
+   
   } catch (error) {
     res.status(500).json("server error");
   }
