@@ -26,8 +26,9 @@ const transportMail = nodemailer_1.default.createTransport({
     },
 });
 const addUserDetals = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+
     const { name, email, phone, createUserName, createPassword, confirmPassword, } = req.body;
-    console.log(req.body);
+    console.log("hicjashvbfakfbakh");
     try {
         const isUserDetails = yield userDetailsModel_1.userDetails.findOne({ email });
         console.log(isUserDetails);
@@ -62,7 +63,9 @@ const addUserDetals = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         }
     }
     catch (error) {
+        console.log(error);
         res.status(500).json("server Error");
+        
     }
 });
 exports.addUserDetals = addUserDetals;
@@ -85,6 +88,7 @@ const verifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         }
     }
     catch (error) {
+        console.log(error)
         res.status(500).json("server Error");
     }
 });

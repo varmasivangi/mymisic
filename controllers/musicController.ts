@@ -75,7 +75,8 @@ export const getSongs = async (req: any, res: any) => {
 
 export const addfavSongToList = async (req: any, res: any) => {
   try {
-    const songId = req.body;
+    const songId = req.body.songId;
+    console.log("body",req.body)
     const jwtToken = req.header("Authorization")?.split(" ")[1];
 
     console.log(jwtToken )
@@ -96,14 +97,17 @@ export const addfavSongToList = async (req: any, res: any) => {
 
     const favSong = new addfavSong({
       songId: songId,
-      userId: decoded.id,
+      userId: String(decoded.id),
     });
+    console.log("fav",favSong)
     await favSong.save();
     res.status(200).json("Added to Fav List");
 
    
   } catch (error) {
+
     res.status(500).json("server error");
+   
   }
 };
 
@@ -116,19 +120,22 @@ export const getFavSongsList = async (req: any, res: any) => {
   }
 
   const decoded: any = jwt.verify(jwtToken, "SECRET_KEY");
-  console.log("Decoded payload:", decoded);
+  
   if (!decoded || !decoded.id) {
     return res
       .status(401)
       .json({ message: "Access denied. No token provided." });
   }
 
-  const favSongsIds = await addfavSong.find({ userId: decoded.id });
-    const songIds = favSongsIds.map((song: any) => song.songId); 
 
+  const favSongsIds = await addfavSong.find({ userId: decoded.id });
+
+    const songIds = favSongsIds.map((song: any) => song.songId); 
+    console.log("fav songs",songIds)
     const favSongsDetails = await addmusic.find({ _id: { $in: songIds } });
+  
 
     return res.status(200).json(favSongsDetails);
 
-  console.log()
+
 };
