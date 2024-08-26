@@ -21,14 +21,13 @@ const transportMail = nodemailer_1.default.createTransport({
     port: 587,
     secure: false,
     auth: {
-        user: "varmathelegend996@gmail.com",
-        pass: " bqqg wnae enpr rjeq",
+        user: " varmasivangi949@gmail.com",
+        pass: "kieh tgkk fkqr cdts",
     },
 });
 const addUserDetals = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-
     const { name, email, phone, createUserName, createPassword, confirmPassword, } = req.body;
-    console.log("hicjashvbfakfbakh");
+    console.log(req.body);
     try {
         const isUserDetails = yield userDetailsModel_1.userDetails.findOne({ email });
         console.log(isUserDetails);
@@ -63,9 +62,7 @@ const addUserDetals = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         }
     }
     catch (error) {
-        console.log(error);
         res.status(500).json("server Error");
-        
     }
 });
 exports.addUserDetals = addUserDetals;
@@ -88,7 +85,6 @@ const verifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         }
     }
     catch (error) {
-        console.log(error)
         res.status(500).json("server Error");
     }
 });

@@ -106,7 +106,8 @@ exports.getSongs = getSongs;
 const addfavSongToList = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
-        const songId = req.body;
+        const songId = req.body.songId;
+        console.log("body", req.body);
         const jwtToken = (_a = req.header("Authorization")) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
         console.log(jwtToken);
         if (!jwtToken) {
@@ -123,8 +124,9 @@ const addfavSongToList = (req, res) => __awaiter(void 0, void 0, void 0, functio
         }
         const favSong = new addMusic_1.addfavSong({
             songId: songId,
-            userId: decoded.id,
+            userId: String(decoded.id),
         });
+        console.log("fav", favSong);
         yield favSong.save();
         res.status(200).json("Added to Fav List");
     }
@@ -142,7 +144,6 @@ const getFavSongsList = (req, res) => __awaiter(void 0, void 0, void 0, function
             .json({ message: "Access denied. No token provided." });
     }
     const decoded = jsonwebtoken_1.default.verify(jwtToken, "SECRET_KEY");
-    console.log("Decoded payload:", decoded);
     if (!decoded || !decoded.id) {
         return res
             .status(401)
@@ -150,8 +151,8 @@ const getFavSongsList = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
     const favSongsIds = yield addMusic_1.addfavSong.find({ userId: decoded.id });
     const songIds = favSongsIds.map((song) => song.songId);
+    console.log("fav songs", songIds);
     const favSongsDetails = yield addMusic_1.addmusic.find({ _id: { $in: songIds } });
     return res.status(200).json(favSongsDetails);
-    console.log();
 });
 exports.getFavSongsList = getFavSongsList;
